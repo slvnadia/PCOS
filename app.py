@@ -184,8 +184,6 @@ with col2:
         help="Kebiasaan konsumsi makanan cepat saji secara rutin"
     )
 
-st.divider()
-
 # =============================================================================
 # TOMBOL PREDIKSI DAN RESET
 # =============================================================================
@@ -358,7 +356,7 @@ if predict_btn:
 
                 st.divider()
                 st.info(
-                    "**⚕️ Catatan Klinis:** Hasil prediksi ini dihasilkan "
+                    "** Catatan Klinis:** Hasil prediksi ini dihasilkan "
                     "oleh model komputasional dan **tidak dapat digunakan "
                     "sebagai diagnosis definitif**. Konfirmasi diagnosis PCOS "
                     "harus dilakukan oleh tenaga medis berlisensi melalui "
@@ -369,12 +367,3 @@ if predict_btn:
             except Exception as e:
                 st.error(f"Terjadi kesalahan saat prediksi: {e}")
                 st.code(str(e))
-
-# =============================================================================
-# FOOTER
-# =============================================================================
-st.divider()
-st.caption(
-    "Penelitian Skripsi — Analisis Komparatif Algoritma Machine Learning "
-    "(Random Forest, XGBoost, dan SVM) untuk Prediksi Dini PCOS | 2025"
-)
