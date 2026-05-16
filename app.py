@@ -268,13 +268,13 @@ if predict_btn:
 
         if prediction == 1:
             st.error(
-                f"### RISIKO PCOS TERDETEKSI\n"
+                f"### RISIKO PCOS TERDETEKSI \n"
                 f"Model memprediksi pasien **positif PCOS** "
                 f"dengan probabilitas **{prob_positive:.1%}**"
             )
         else:
             st.success(
-                f"###RISIKO PCOS TIDAK TERDETEKSI\n"
+                f"### RISIKO PCOS TIDAK TERDETEKSI \n"
                 f"Model memprediksi pasien **non-PCOS** "
                 f"dengan probabilitas **{prob_negative:.1%}**"
             )
