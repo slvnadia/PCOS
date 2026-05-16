@@ -14,7 +14,6 @@ import matplotlib.pyplot as plt
 # =============================================================================
 st.set_page_config(
     page_title="PCOS Early Detection",
-    page_icon="🔬",
     layout="centered",
     initial_sidebar_state="expanded"
 )
@@ -39,13 +38,13 @@ except FileNotFoundError as e:
 # =============================================================================
 # HEADER
 # =============================================================================
-st.title("🔬 Sistem Skrining Dini PCOS")
+st.title("Sistem Skrining Dini PCOS")
 st.markdown("""
 **Polycystic Ovary Syndrome (PCOS) Early Detection System**  
 Berbasis algoritma *Random Forest* yang dilatih menggunakan dataset klinis
 dari 10 rumah sakit di Kerala, India.
 
-> ⚠️ **Perhatian:** Sistem ini merupakan *proof of concept* untuk keperluan
+>  **Perhatian:** Sistem ini merupakan *proof of concept* untuk keperluan
 penelitian. **Bukan pengganti diagnosis medis profesional.**
 """)
 st.divider()
@@ -54,7 +53,7 @@ st.divider()
 # SIDEBAR — INFORMASI MODEL
 # =============================================================================
 with st.sidebar:
-    st.header("📊 Informasi Model")
+    st.header("Informasi Model")
     st.markdown("""
 **Algoritma:** Random Forest  
 **Validasi:** Stratified 5-Fold CV + SMOTE  
@@ -73,7 +72,7 @@ Top 10 berdasarkan
 """)
     st.divider()
     st.markdown("""
-**📌 Panduan Pengisian**
+** Panduan Pengisian**
 - Isi semua kolom dengan data klinis pasien
 - Klik tombol **Prediksi** untuk melihat hasil
 - Klik **Reset** untuk mengosongkan form
@@ -82,7 +81,7 @@ Top 10 berdasarkan
 # =============================================================================
 # FORM INPUT — KOSONG SAAT PERTAMA DIBUKA
 # =============================================================================
-st.subheader("📋 Data Klinis Pasien")
+st.subheader("Data Klinis Pasien")
 st.markdown(
     "Masukkan nilai parameter klinis berikut "
     "berdasarkan hasil pemeriksaan pasien:"
@@ -97,7 +96,7 @@ if "reset" not in st.session_state:
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("**🔬 Morfologi Ovarium**")
+    st.markdown("**Morfologi Ovarium**")
     follicle_r = st.number_input(
         "Jumlah Folikel Ovarium Kanan — Follicle No. (R)",
         min_value=0, max_value=50,
@@ -115,7 +114,7 @@ with col1:
         help="Jumlah folikel pada ovarium kiri (hasil USG)"
     )
 
-    st.markdown("**🩸 Parameter Hormonal**")
+    st.markdown("**Parameter Hormonal**")
     lh = st.number_input(
         "Kadar LH (mIU/mL)",
         min_value=0.0, max_value=100.0,
@@ -133,7 +132,7 @@ with col1:
         help="Anti-Müllerian Hormone dari hasil laboratorium"
     )
 
-    st.markdown("**🔄 Siklus Menstruasi**")
+    st.markdown("**Siklus Menstruasi**")
     cycle = st.selectbox(
         "Keteraturan Siklus — Cycle (R/I)",
         options=[None, 1, 2],
@@ -144,7 +143,7 @@ with col1:
     )
 
 with col2:
-    st.markdown("**🌿 Gejala Hiperandrogenisme**")
+    st.markdown("**Gejala Hiperandrogenisme**")
     hair_growth = st.selectbox(
         "Pertumbuhan Rambut Berlebih — Hair Growth (Y/N)",
         options=[None, 1, 0],
@@ -167,7 +166,7 @@ with col2:
         help="Jerawat akibat kelebihan hormon androgen"
     )
 
-    st.markdown("**⚖️ Parameter Metabolik**")
+    st.markdown("**Parameter Metabolik**")
     weight_gain = st.selectbox(
         "Penambahan Berat Badan — Weight Gain (Y/N)",
         options=[None, 1, 0],
@@ -176,7 +175,7 @@ with col2:
         help="Penambahan berat badan yang tidak wajar"
     )
 
-    st.markdown("**🍔 Gaya Hidup**")
+    st.markdown("**Gaya Hidup**")
     fast_food = st.selectbox(
         "Konsumsi Makanan Cepat Saji — Fast Food (Y/N)",
         options=[None, 1, 0],
@@ -194,13 +193,13 @@ col_btn1, col_btn2 = st.columns([3, 1])
 
 with col_btn1:
     predict_btn = st.button(
-        "🔍 Prediksi Risiko PCOS",
+        "Prediksi Risiko PCOS",
         type="primary",
         use_container_width=True
     )
 with col_btn2:
     reset_btn = st.button(
-        "🔄 Reset",
+        "Reset",
         type="secondary",
         use_container_width=True
     )
@@ -230,14 +229,14 @@ def validate_inputs():
 # =============================================================================
 if predict_btn:
     if not model_loaded:
-        st.error(f"❌ File model tidak ditemukan: {load_error}")
+        st.error(f"File model tidak ditemukan: {load_error}")
 
     else:
         # ── Validasi kelengkapan input ────────────────────────────────────────
         missing_fields = validate_inputs()
         if missing_fields:
             st.warning(
-                "⚠️ Mohon lengkapi semua kolom berikut sebelum prediksi:\n\n"
+                "Mohon lengkapi semua kolom berikut sebelum prediksi:\n\n"
                 + "\n".join([f"- {f}" for f in missing_fields])
             )
 
@@ -268,7 +267,7 @@ if predict_btn:
                 if col in input_full.columns:
                     input_full[col] = val
                 else:
-                    st.warning(f"⚠️ Kolom '{col}' tidak ditemukan dalam model.")
+                    st.warning(f"Kolom '{col}' tidak ditemukan dalam model.")
 
             # ── Prediksi ──────────────────────────────────────────────────────
             try:
@@ -278,17 +277,17 @@ if predict_btn:
                 prob_positive   = prediction_prob[1]
 
                 # ── Tampilkan hasil ───────────────────────────────────────────
-                st.subheader("📊 Hasil Prediksi")
+                st.subheader("Hasil Prediksi")
 
                 if prediction == 1:
                     st.error(
-                        f"### 🔴 RISIKO PCOS TERDETEKSI\n"
+                        f"### RISIKO PCOS TERDETEKSI\n"
                         f"Model memprediksi pasien **positif PCOS** "
                         f"dengan probabilitas **{prob_positive:.1%}**"
                     )
                 else:
                     st.success(
-                        f"### 🟢 RISIKO PCOS TIDAK TERDETEKSI\n"
+                        f"### RISIKO PCOS TIDAK TERDETEKSI\n"
                         f"Model memprediksi pasien **non-PCOS** "
                         f"dengan probabilitas **{prob_negative:.1%}**"
                     )
