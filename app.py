@@ -44,7 +44,9 @@ except Exception as e:
 # =============================================================================
 st.title("Sistem Skrining Dini PCOS")
 st.markdown("""
-**Polycystic Ovary Syndrome (PCOS) Early Detection System**
+**Polycystic Ovary Syndrome (PCOS) Early Detection System**  
+Berbasis algoritma *Random Forest* yang dilatih menggunakan dataset klinis
+dari 10 rumah sakit di Kerala, India.
 
 > **Perhatian:** Sistem ini merupakan *proof of concept* untuk keperluan
 penelitian. **Bukan pengganti diagnosis medis profesional.**
